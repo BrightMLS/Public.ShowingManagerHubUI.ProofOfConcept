@@ -22,8 +22,7 @@
     "pretest": "npm run lint",
     "test": "react-scripts test --verbose --coverage --watchAll=false",
     "test:watch": "react-scripts test --verbose",
-    "open:coverage": "open-cli ./coverage/Lcov-report/index.html",
-    "format:tf": "terraform fmt -recursive ./modules && terraform fmt -recursive ./terraformScripts && terraform fmt -recursive ./terraformPipeline && terraform fmt -recursive ./terraformReleasePipeline"
+    "open:coverage": "open-cli ./coverage/Lcov-report/index.html"
   },
   "lint-staged": {
     "src/**/*.{js,jsx,ts,tsx,json,css,scss,md}": [
