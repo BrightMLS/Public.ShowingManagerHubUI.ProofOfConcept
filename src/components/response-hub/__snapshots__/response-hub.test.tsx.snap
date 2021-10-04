@@ -1,0 +1,41 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<ResponseHub /> Component should render without crashing 1`] = `
+<Styled(MuiBox)
+  className="makeStyles-root-1"
+>
+  <WithStyles(ForwardRef(Typography))
+    className="makeStyles-typoStyle-3"
+  >
+    Response from HUB:
+  </WithStyles(ForwardRef(Typography))>
+  <div
+    className="makeStyles-inputType-2 makeStyles-inputType-4"
+    dangerouslySetInnerHTML={
+      Object {
+        "__html": "null",
+      }
+    }
+  />
+</Styled(MuiBox)>
+`;
+
+exports[`<ResponseHub /> Component should render without crashing 2`] = `
+<Styled(MuiBox)
+  className="makeStyles-root-1"
+>
+  <WithStyles(ForwardRef(Typography))
+    className="makeStyles-typoStyle-3"
+  >
+    Response from HUB:
+  </WithStyles(ForwardRef(Typography))>
+  <div
+    className="makeStyles-inputType-2 makeStyles-inputType-5"
+    dangerouslySetInnerHTML={
+      Object {
+        "__html": "",
+      }
+    }
+  />
+</Styled(MuiBox)>
+`;

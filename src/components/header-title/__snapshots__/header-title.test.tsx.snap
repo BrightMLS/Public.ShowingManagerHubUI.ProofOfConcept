@@ -1,0 +1,10 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<HeaderTitle /> Component should render without crashing 1`] = `
+<WithStyles(ForwardRef(Typography))
+  className="makeStyles-root-1"
+  variant="h1"
+>
+  title
+</WithStyles(ForwardRef(Typography))>
+`;
