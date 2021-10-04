@@ -83,7 +83,7 @@ export const MODULE_HEADER_TITLE: any = {
 }
 
 export const API_ERROR_MESSAGE = 'Something went wrong!'
-export const API_URL_NOT_PRESENT = 'Api has not implemented'
+export const API_URL_NOT_PRESENT = 'Not implemented'
 
 export const REGISTER_ORG_TYPES: Array<any> = [
   { key: 'ShowingManager', value: 'ShowingManager' },

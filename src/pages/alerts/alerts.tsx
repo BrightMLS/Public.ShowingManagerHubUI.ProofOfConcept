@@ -16,9 +16,10 @@ import {
   APPOINTMENT_REQUESTS_COLUMNS,
   ALERT_EVENT_TYPES,
   EVENTS_MAPPING,
+  API_URL_NOT_PRESENT,
 } from 'constant'
 import useStyles from './alerts-style'
-import { localDate } from 'utils'
+import { localDate, isEnvHasUrl } from 'utils'
 import { Grid, Button, Typography } from '@material-ui/core'
 
 const Alerts = (props: any) => {
@@ -39,50 +40,59 @@ const Alerts = (props: any) => {
       data: [],
     },
     onSubmit: async (values: Record<string, any>) => {
-      if (values) {
-        setShowLoader(true)
-        const { maxRows, eventType } = values
-        let webhookEvent = eventType
-        try {
-          const userDetails = localStorage.getItem('userDetails')
-          const applicationId = userDetails ? JSON.parse(userDetails).appId : ''
-          const organizationId = userDetails
-            ? JSON.parse(userDetails).orgId
-            : ''
-          if (!eventType && componentType !== 'all_alerts') {
-            webhookEvent = EVENTS_MAPPING[componentType]
-          }
-          const extraQueryyParameter = webhookEvent
-            ? `maxRows=${maxRows}&eventType=${webhookEvent}`
-            : `maxRows=${maxRows}`
+      if (isEnvHasUrl(process.env.REACT_APP_WEBHOOK_API_ENDPOINT)) {
+        if (values) {
+          setShowLoader(true)
+          const { maxRows, eventType } = values
+          let webhookEvent = eventType
+          try {
+            const userDetails = localStorage.getItem('userDetails')
+            const applicationId = userDetails
+              ? JSON.parse(userDetails).appId
+              : ''
+            const organizationId = userDetails
+              ? JSON.parse(userDetails).orgId
+              : ''
+            if (!eventType && componentType !== 'all_alerts') {
+              webhookEvent = EVENTS_MAPPING[componentType]
+            }
+            const extraQueryyParameter = webhookEvent
+              ? `maxRows=${maxRows}&eventType=${webhookEvent}`
+              : `maxRows=${maxRows}`
 
-          const response = await axios.get(
-            `${appConfig.webhookApiEndpoint}/fetch-webhook?organizationId=${organizationId}&applicationId=${applicationId}&${extraQueryyParameter}`,
-          )
-          const { data } = response
-          let result = data?.data?.length ? data.data : []
-          let tableData: any = []
-          for (const key in result) {
-            const value = result[key]
-            let indexValue: any = [
-              localDate(value.insertedDateTime),
-              value.organizationId,
-              value.applicationId,
-              value.subscriptionId,
-              value.webhookEvent,
-              value.attempt,
-              value.data,
-            ]
+            const response = await axios.get(
+              `${appConfig.webhookApiEndpoint}/fetch-webhook?organizationId=${organizationId}&applicationId=${applicationId}&${extraQueryyParameter}`,
+            )
+            const { data } = response
+            let result = data?.data?.length ? data.data : []
+            let tableData: any = []
+            for (const key in result) {
+              const value = result[key]
+              let indexValue: any = [
+                localDate(value.insertedDateTime),
+                value.organizationId,
+                value.applicationId,
+                value.subscriptionId,
+                value.webhookEvent,
+                value.attempt,
+                value.data,
+              ]
 
-            tableData.push(indexValue)
+              tableData.push(indexValue)
+            }
+            setRowsData(tableData)
+            setShowLoader(false)
+          } catch (error: any) {
+            console.error(error)
+            enqueueSnackbar(API_ERROR_MESSAGE, { variant: 'error' })
+            setShowLoader(false)
           }
-          setRowsData(tableData)
-          setShowLoader(false)
-        } catch (error: any) {
-          console.error(error)
-          enqueueSnackbar(API_ERROR_MESSAGE, { variant: 'error' })
-          setShowLoader(false)
         }
+      } else {
+        enqueueSnackbar(API_URL_NOT_PRESENT, {
+          variant: 'warning',
+          preventDuplicate: true,
+        })
       }
     },
   })

@@ -67,8 +67,7 @@ export const localDate = (date: string | number) => {
   )
 }
 
-export const isEnvHasUrl = (): boolean => {
-  const url = process.env.REACT_APP_API_ENDPOINT
+export const isEnvHasUrl = (url: string | null | undefined): boolean => {
   if (!url) return false
   else return true
 }

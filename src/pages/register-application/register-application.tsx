@@ -33,7 +33,7 @@ const RegisterApplication = () => {
       callBackUrl: '',
     },
     onSubmit: async (values: Record<string, any>) => {
-      if (isEnvHasUrl()) {
+      if (isEnvHasUrl(process.env.REACT_APP_API_ENDPOINT)) {
         if (values) {
           setShowLoader(true)
           const {

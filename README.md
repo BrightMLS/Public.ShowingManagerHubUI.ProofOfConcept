@@ -1,52 +1,92 @@
 # Public.ShowingManagerHubUI.ProofOfConcept
 
-## Available Scripts
+## Browser Support
 
-In the project directory, you can run:
+- All modern browsers are supported.
 
-### `yarn start`
+## Development notes
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+### This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app) (CRA)
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
+### Prerequisite
 
-### `yarn test`
+- Node >= 8.10.x
+- Visual Studio Code editor (recommended) with following extensions
+  - ESLint
+  - Prettier - Code formatter
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+### Quick install
 
-### `yarn build`
+Running following script from root of the project:
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+```bash
+npm install
+```
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+### Running your application
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+- Create `.env` file as mentioned in next section.
+- Run `npm start` script.
 
-### `yarn eject`
+### .env file
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+- Duplicate `.env.example` (contains dev env values).
+- Rename copy to `.env`.
+- Only commit `.env.example` file with **dev env** values.
+- Never commit `.env` file.
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+### Scripts
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
+Run following scripts from root of the project like
 
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
+- `npm install`: Install all the dependencies
+- `npm start`: Runs the app in the development mode
+- `npm run lint`: Check for any lint issue
+- `npm run lint:fix`: Automatically try to fix as many issues as possible
+- `npm test`: Run all test cases and generate code coverage report on the terminal & to the `/coverage` folder
+- `npm run test:watch`: Launches the test runner in the interactive watch mode
+- `npm run build`: Builds the app for production to the `/build` folder
 
-## Learn More
+### Source and distribution path
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+- `/src`: Contains the source files
+- `/public`: Contains index.html, static resources and favicon. index.html file is used to launch the app.
+- `/build`: Contains the distribution files
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+### Entry point and application flow
 
-## Steps to run Project
+- `/src/index.tsx` is the entry point of the application, which imports `/src/app.tsx` where routes are defined and application flows based on routes.
 
-## copy .env.example and make a .env
+### Folder structure
 
-## Please make sure the env has your api endpoints
+- `/src`: Contains source code of the app
+- `/src/components`: Contains sharable components for the app
+- `/src/config`: Contains centralized configuration for the app
+- `/src/pages`: Contains app pages based on routes defined in `/src/config/routes-config.ts`
+  - Page specific components and styles is/are in its folder itself
+- `/src/theme`: Contains theme configuration of material-ui
+- `/src/utils`: Contains helper methods and constants used by the app
 
-**NOTE if the build and code is not pushing make sure you will run the npm run test -u to update the test cases!**
+### File naming convention
+
+- All files takes the name of its folder name with some suffix added to it. E.g. for loader component
+  - loader/loader.tsx
+  - loader/loader-style.ts
+  - loader/loader.test.tsx
+- This makes development easier. Either the developer scroll the directory, search the file or the file opened in the tab.
+- It is recommended not to use `index` name in the file as it makes huge confusion while development.
+- You will only find file name with `index` in main folders of `src` like `components`, `config` etc and page's components folder because it contains the named export so that while importing those file, you don't have to write the long path names and you directly deals with importing component or feature. E.g. Check the loader component imported in `/src/pages/login/login.tsx`.
+
+### Debugging app in Visual Studio code editor
+
+- `.vscode/launch.json` file is used to debug the App with `Debugger for chrome Extension` (install it if not there) and Tests with Node.
+- Press `F5` to debug App or Tests by choosing `Debug App` or `Debug Tests` option.
+
+### Updating test snapshot
+
+Either update the snapshot by `npm run test:watch` or `npm test -- -u`
+
+### Alternatives to CRA ejecting
+
+[react-app-rewired](https://github.com/timarney/react-app-rewired) package
+override create-react-app webpack configs without ejecting. So, from `package.json`, intentionally removed script `"eject": "react-scripts eject"`.
