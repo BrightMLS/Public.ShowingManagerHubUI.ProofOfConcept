@@ -5,6 +5,13 @@ export enum FONT_FAMILY {
   LATO = 'Lato, sans-serif',
   BITTER = 'Bitter, serif',
 }
+
+export const CANCEL_APPOINTMENT_REASONS: Array<any> = [
+  { key: 'Reschedule', value: 'Reschedule' },
+  { key: 'Property Off Market', value: 'PropertyOffMarket' },
+  { key: 'Scheduling Conflict', value: 'SchedulingConflict' },
+  { key: 'Other', value: 'Other' },
+]
 /**
  * sidebar list items -unauth
  */
@@ -80,6 +87,7 @@ export const MODULE_HEADER_TITLE: any = {
   appointment_requests: 'Appointment Requests',
   request_response: 'Request Response',
   appointment_change: 'Appointment Change',
+  cancel_appointment: 'Cancel Appointment',
 }
 
 export const API_ERROR_MESSAGE = 'Something went wrong!'

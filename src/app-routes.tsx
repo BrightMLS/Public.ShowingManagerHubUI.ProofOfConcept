@@ -8,6 +8,7 @@ import {
   RequestAppointment,
   AddShowingRestrictions,
   Alerts,
+  CancelAppointment,
 } from 'pages'
 import { Layout, PrivateRoute, PublicRoute } from 'components'
 
@@ -69,6 +70,11 @@ const AppRoutes = () => (
           exact
           path="/respond-to-request"
           component={RespondToRquest}
+        />
+        <PrivateRoute
+          exact
+          path="/cancel-appointment"
+          component={CancelAppointment}
         />
       </Switch>
     </Layout>

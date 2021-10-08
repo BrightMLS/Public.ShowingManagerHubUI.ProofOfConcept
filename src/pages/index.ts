@@ -6,3 +6,4 @@ export { default as RespondToRquest } from './respond-to-request/respond-to-requ
 export { default as RequestAppointment } from './request-appointment/request-appointment'
 export { default as AddShowingRestrictions } from './add-showing-restrictions/add-showing-restrictions'
 export { default as Alerts } from './alerts/alerts'
+export { default as CancelAppointment } from './cancel-appointment/cancel-appointment'
