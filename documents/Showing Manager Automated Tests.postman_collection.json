@@ -39,7 +39,7 @@
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{\r\n  \"organizationName\": \"Showing Hub-1\",\r\n  \"contactEmail\": \"aramirez@crmls.org\",\r\n  \"contactFirstName\": \"Armando\",\r\n  \"contactLastName\": \"Ramirez\",\r\n  \"contactPhone\": \"806-438-9662\",\r\n  \"organizationType\": \"ShowingManager\"\r\n}",
+					"raw": "{\r\n  \"organizationName\": \"Showing Hub-4\",\r\n  \"contactEmail\": \"aramirez@crmls.org\",\r\n  \"contactFirstName\": \"Armando\",\r\n  \"contactLastName\": \"Ramirez\",\r\n  \"contactPhone\": \"806-438-9662\",\r\n  \"organizationType\": \"ShowingManager\"\r\n}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -96,7 +96,7 @@
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{\r\n  \"organizationId\": \"{{OrganizationId}}\",\r\n  \"applicationScope\": \"ReadWrite\",\r\n  \"applicationName\": \"Showing Manager Tester-1\",\r\n  \"contactEmail\": \"aramirez@crmls.org\",\r\n  \"contactPhone\": \"888777444\",\r\n  \"contactFirstName\": \"Armando\",\r\n  \"contactLastName\": \"Ramirez\",\r\n  \"callBackUrl\": \"https://webhook.site/5ccdbeaa-59f3-44d0-bb4c-686926101e6f\"\r\n}",
+					"raw": "{\r\n  \"organizationId\": \"{{OrganizationId}}\",\r\n  \"applicationScope\": \"ReadWrite\",\r\n  \"applicationName\": \"Showing Manager Tester-4\",\r\n  \"contactEmail\": \"aramirez@crmls.org\",\r\n  \"contactPhone\": \"888777444\",\r\n  \"contactFirstName\": \"Armando\",\r\n  \"contactLastName\": \"Ramirez\",\r\n  \"callBackUrl\": \"https://webhook.site/5ccdbeaa-59f3-44d0-bb4c-686926101e6f\"\r\n}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -205,7 +205,7 @@
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{\r\n  \"listingId\": \"11111111558888\",\r\n  \"applicationId\": \"{{ApplicationId}}\",\r\n  \"universalPropertyId\": \"dontknow-1245925\",\r\n  \"address1\": \"22888 5th Ave.\",\r\n  \"address2\": \"\",\r\n  \"city\": \"Thornton\",\r\n  \"state\": \"Colorado\",\r\n  \"zipCode\": \"80241\",\r\n  \"listAgentMlsId\": \"784512\",\r\n  \"listAgentName\": \"Show Hub Realtors\",\r\n  \"listAgentLicenseStateAffirmation\": true,\r\n  \"listAgentLicenseNumber\": \"123456789\",\r\n  \"listingAgentLicenseState\": \"Colorado\",\r\n  \"showableStartDate\": \"2021-10-04T08:00\",\r\n  \"showableEndDate\": \"2021-10-08T17:00\",\r\n  \"showingInstructions\": \"The showing instructions.\",\r\n  \"comments\": \"The comments for the listing\",\r\n  \"requiredParticipants\": \"ListingAgent\",\r\n  \"showingMethod\": \"InPersonOnly\",\r\n  \"confirmationType\": \"AutoApprove\",\r\n  \"showingAllowed\": \"Showable\",\r\n  \"dateTimeReoccurringRestrictionsList\": [\r\n    {\r\n      \"dayOfWeek\": \"Monday\",\r\n      \"numberOfWeeks\": 1,\r\n      \"beginDate\": \"2021-10-04T08:00\",\r\n      \"startDatetime\": \"2021-10-04T08:00\",\r\n      \"endDatetime\": \"2021-10-04T17:00\"\r\n    },\r\n    {\r\n      \"dayOfWeek\": \"Tuesday\",\r\n      \"numberOfWeeks\": 1,\r\n      \"beginDate\": \"2021-10-05T08:00\",\r\n      \"startDatetime\": \"2021-10-05T08:00\",\r\n      \"endDatetime\": \"2021-10-05T17:00\"\r\n    }\r\n  ]\r\n}",
+					"raw": "{\r\n  \"listingId\": \"111111115589999\",\r\n  \"applicationId\": \"{{ApplicationId}}\",\r\n  \"universalPropertyId\": \"dontknow-12459458\",\r\n  \"address1\": \"333 5th Ave.\",\r\n  \"address2\": \"\",\r\n  \"city\": \"Thornton\",\r\n  \"state\": \"Colorado\",\r\n  \"zipCode\": \"80241\",\r\n  \"listAgentMlsId\": \"784512\",\r\n  \"listAgentName\": \"Show Hub Realtors\",\r\n  \"listAgentLicenseStateAffirmation\": true,\r\n  \"listAgentLicenseNumber\": \"123456789\",\r\n  \"listingAgentLicenseState\": \"Colorado\",\r\n  \"showableStartDate\": \"2021-10-04T08:00\",\r\n  \"showableEndDate\": \"2021-10-08T17:00\",\r\n  \"showingInstructions\": \"The showing instructions.\",\r\n  \"comments\": \"The comments for the listing\",\r\n  \"requiredParticipants\": \"ListingAgent\",\r\n  \"showingMethod\": \"InPersonOnly\",\r\n  \"confirmationType\": \"AutoApprove\",\r\n  \"showingAllowed\": \"Showable\",\r\n  \"dateTimeReoccurringRestrictionsList\": [\r\n    {\r\n      \"dayOfWeek\": \"Monday\",\r\n      \"numberOfWeeks\": 1,\r\n      \"beginDate\": \"2021-10-04T08:00\",\r\n      \"startDatetime\": \"2021-10-04T08:00\",\r\n      \"endDatetime\": \"2021-10-04T17:00\"\r\n    },\r\n    {\r\n      \"dayOfWeek\": \"Tuesday\",\r\n      \"numberOfWeeks\": 1,\r\n      \"beginDate\": \"2021-10-05T08:00\",\r\n      \"startDatetime\": \"2021-10-05T08:00\",\r\n      \"endDatetime\": \"2021-10-05T17:00\"\r\n    }\r\n  ]\r\n}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -247,6 +247,7 @@
 							"if(jsonData.isSuccessful)\r",
 							"{\r",
 							"    pm.environment.set(\"RequestId\", jsonData.results[0].requestId);\r",
+							"    pm.environment.set(\"AppointmentId\", jsonData.results[0].appointmentId);\r",
 							"}"
 						],
 						"type": "text/javascript"
