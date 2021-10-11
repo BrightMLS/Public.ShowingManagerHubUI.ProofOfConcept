@@ -76,6 +76,11 @@ const AppRoutes = () => (
           path="/cancel-appointment"
           component={CancelAppointment}
         />
+        <PrivateRoute
+          exact
+          path="/cancel-appointments"
+          component={CancelAppointment}
+        />
       </Switch>
     </Layout>
   </Router>
