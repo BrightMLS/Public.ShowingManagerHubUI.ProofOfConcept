@@ -1,0 +1,20 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<Loader /> Component should render without crashing 1`] = `
+<Fragment>
+  <WithStyles(ForwardRef(Backdrop))
+    className="makeStyles-backdrop-4"
+    open={true}
+    transitionDuration={0}
+  />
+  <div
+    className="makeStyles-spinnerContainer-1"
+  >
+    <div
+      className="makeStyles-spinner-2"
+    />
+  </div>
+</Fragment>
+`;
+
+exports[`<Loader /> Component should render without crashing 2`] = `""`;

@@ -1,0 +1,509 @@
+{
+	"info": {
+		"_postman_id": "7632bde9-6f81-410e-b1eb-c6919e0d7d12",
+		"name": "Showing Manager Automated Tests",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Register Organization",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"var jsonResponse = pm.response;\r",
+							"var jsonData = jsonResponse.json();\r",
+							"\r",
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    jsonResponse.to.have.status(200);\r",
+							"});\r",
+							"pm.test(\"Organization Created\", function () {    \r",
+							"    pm.expect(jsonData.results[0].organizationId).to.not.eql('');\r",
+							"});\r",
+							"\r",
+							"if(jsonData.isSuccessful)\r",
+							"{\r",
+							"    pm.environment.set(\"OrganizationId\", jsonData.results[0].organizationId);\r",
+							"}"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"organizationName\": \"Showing Hub-4\",\r\n  \"contactEmail\": \"aramirez@crmls.org\",\r\n  \"contactFirstName\": \"Armando\",\r\n  \"contactLastName\": \"Ramirez\",\r\n  \"contactPhone\": \"806-438-9662\",\r\n  \"organizationType\": \"ShowingManager\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{HubEndpoint}}/api/app/organization/registration",
+					"host": [
+						"{{HubEndpoint}}"
+					],
+					"path": [
+						"api",
+						"app",
+						"organization",
+						"registration"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Register Application",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"var jsonResponse = pm.response;\r",
+							"var jsonData = jsonResponse.json();\r",
+							"\r",
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    jsonResponse.to.have.status(200);\r",
+							"});\r",
+							"pm.test(\"Application Created\", function () {    \r",
+							"    pm.expect(jsonData.results[0].applicationId).to.not.eql('');\r",
+							"});\r",
+							"pm.test(\"ApiKey Generated\", function () {    \r",
+							"    pm.expect(jsonData.results[0].apiKey).to.not.eql('');\r",
+							"});\r",
+							"\r",
+							"if(jsonData.isSuccessful)\r",
+							"{\r",
+							"    pm.environment.set(\"ApplicationId\", jsonData.results[0].applicationId);\r",
+							"    pm.environment.set(\"ApiKey\", jsonData.results[0].apiKey);\r",
+							"}"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"organizationId\": \"{{OrganizationId}}\",\r\n  \"applicationScope\": \"ReadWrite\",\r\n  \"applicationName\": \"Showing Manager Tester-4\",\r\n  \"contactEmail\": \"aramirez@crmls.org\",\r\n  \"contactPhone\": \"888777444\",\r\n  \"contactFirstName\": \"Armando\",\r\n  \"contactLastName\": \"Ramirez\",\r\n  \"callBackUrl\": \"https://webhook.site/5ccdbeaa-59f3-44d0-bb4c-686926101e6f\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{HubEndpoint}}/api/app/application/registration",
+					"host": [
+						"{{HubEndpoint}}"
+					],
+					"path": [
+						"api",
+						"app",
+						"application",
+						"registration"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get Token",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"var jsonResponse = pm.response;\r",
+							"var jsonData = jsonResponse.json();\r",
+							"\r",
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    jsonResponse.to.have.status(200);\r",
+							"});\r",
+							"    \r",
+							"pm.test(\"Token Generated\", function () {    \r",
+							"    pm.expect(jsonData.token).to.not.eql('');\r",
+							"});\r",
+							"\r",
+							"pm.environment.set(\"Token\", jsonData.token);"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{HubEndpoint}}/api/token?apiKey={{ApiKey}}",
+					"host": [
+						"{{HubEndpoint}}"
+					],
+					"path": [
+						"api",
+						"token"
+					],
+					"query": [
+						{
+							"key": "apiKey",
+							"value": "{{ApiKey}}"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Create Show Listing",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"var jsonResponse = pm.response;\r",
+							"var jsonData = jsonResponse.json();\r",
+							"\r",
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    jsonResponse.to.have.status(200);\r",
+							"});\r",
+							"pm.test(\"Showable Listing Created\", function () {    \r",
+							"    pm.expect(jsonData.results[0].showListingId).to.not.eql('');\r",
+							"});\r",
+							"\r",
+							"if(jsonData.isSuccessful)\r",
+							"{\r",
+							"    pm.environment.set(\"ShowListingId\", jsonData.results[0].showListingId);\r",
+							"}"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{Token}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"listingId\": \"111111115589999\",\r\n  \"applicationId\": \"{{ApplicationId}}\",\r\n  \"universalPropertyId\": \"dontknow-12459458\",\r\n  \"address1\": \"333 5th Ave.\",\r\n  \"address2\": \"\",\r\n  \"city\": \"Thornton\",\r\n  \"state\": \"Colorado\",\r\n  \"zipCode\": \"80241\",\r\n  \"listAgentMlsId\": \"784512\",\r\n  \"listAgentName\": \"Show Hub Realtors\",\r\n  \"listAgentLicenseStateAffirmation\": true,\r\n  \"listAgentLicenseNumber\": \"123456789\",\r\n  \"listingAgentLicenseState\": \"Colorado\",\r\n  \"showableStartDate\": \"2021-10-04T08:00\",\r\n  \"showableEndDate\": \"2021-10-08T17:00\",\r\n  \"showingInstructions\": \"The showing instructions.\",\r\n  \"comments\": \"The comments for the listing\",\r\n  \"requiredParticipants\": \"ListingAgent\",\r\n  \"showingMethod\": \"InPersonOnly\",\r\n  \"confirmationType\": \"AutoApprove\",\r\n  \"showingAllowed\": \"Showable\",\r\n  \"dateTimeReoccurringRestrictionsList\": [\r\n    {\r\n      \"dayOfWeek\": \"Monday\",\r\n      \"numberOfWeeks\": 1,\r\n      \"beginDate\": \"2021-10-04T08:00\",\r\n      \"startDatetime\": \"2021-10-04T08:00\",\r\n      \"endDatetime\": \"2021-10-04T17:00\"\r\n    },\r\n    {\r\n      \"dayOfWeek\": \"Tuesday\",\r\n      \"numberOfWeeks\": 1,\r\n      \"beginDate\": \"2021-10-05T08:00\",\r\n      \"startDatetime\": \"2021-10-05T08:00\",\r\n      \"endDatetime\": \"2021-10-05T17:00\"\r\n    }\r\n  ]\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{HubEndpoint}}/api/app/listing/configureshowablelisting",
+					"host": [
+						"{{HubEndpoint}}"
+					],
+					"path": [
+						"api",
+						"app",
+						"listing",
+						"configureshowablelisting"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Create Appointment Request",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"var jsonResponse = pm.response;\r",
+							"var jsonData = jsonResponse.json();\r",
+							"\r",
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    jsonResponse.to.have.status(200);\r",
+							"});\r",
+							"pm.test(\"Appointment Request Created\", function () {    \r",
+							"    pm.expect(jsonData.results[0].requestId).to.not.eql('');\r",
+							"});\r",
+							"\r",
+							"if(jsonData.isSuccessful)\r",
+							"{\r",
+							"    pm.environment.set(\"RequestId\", jsonData.results[0].requestId);\r",
+							"    pm.environment.set(\"AppointmentId\", jsonData.results[0].appointmentId);\r",
+							"}"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{Token}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"startDatetime\": \"2021-10-04T09:30\",\r\n  \"endDatetime\": \"2021-10-04T10:30\",\r\n  \"appointmentType\": \"FirstShowing\",\r\n  \"appointmentMethod\": \"InPersonOnly\",\r\n  \"buyingAgentID\": \"852697\",\r\n  \"buyingAgentName\": \"Super Buying Agent\",\r\n  \"buyingAgentStateLicenseAffirmation\": true,\r\n  \"buyingAgentLicenseNumber\": \"784512\",\r\n  \"buyingAgentLicenseState\": \"New York\",\r\n  \"buyingAgentMlsId\": \"741258\",\r\n  \"requestNotes\": \"\",\r\n  \"showListingId\": \"{{ShowListingId}}\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{HubEndpoint}}/api/app/request",
+					"host": [
+						"{{HubEndpoint}}"
+					],
+					"path": [
+						"api",
+						"app",
+						"request"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Update Request",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"var jsonResponse = pm.response;\r",
+							"var jsonData = jsonResponse.json();\r",
+							"\r",
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    jsonResponse.to.have.status(200);\r",
+							"});\r",
+							"pm.test(\"Appointment Request Created\", function () {    \r",
+							"    pm.expect(jsonData.results[0].requestId).to.not.eql('');\r",
+							"});\r",
+							"\r",
+							"if(jsonData.isSuccessful)\r",
+							"{\r",
+							"    pm.environment.set(\"RequestId\", jsonData.results[0].requestId);\r",
+							"}"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{Token}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"startDatetime\": \"2021-10-04T10:30\",\r\n  \"endDatetime\": \"2021-10-04T11:30\",\r\n  \"appointmentType\": \"FirstShowing\",\r\n  \"appointmentMethod\": \"InPersonOnly\",\r\n  \"buyingAgentID\": \"852697\",\r\n  \"buyingAgentName\": \"Super Buying Agent\",\r\n  \"buyingAgentStateLicenseAffirmation\": true,\r\n  \"buyingAgentLicenseNumber\": \"784512\",\r\n  \"buyingAgentLicenseState\": \"New York\",\r\n  \"buyingAgentMlsId\": \"741258\",\r\n  \"requestNotes\": \"Changing the appointment time.\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{HubEndpoint}}/api/app/request/update/{{RequestId}}",
+					"host": [
+						"{{HubEndpoint}}"
+					],
+					"path": [
+						"api",
+						"app",
+						"request",
+						"update",
+						"{{RequestId}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Confirm Appointment",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{Token}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "PUT",
+				"header": [],
+				"url": {
+					"raw": "{{HubEndpoint}}/api/app/appointment/confirm/{{AppointmentId}}",
+					"host": [
+						"{{HubEndpoint}}"
+					],
+					"path": [
+						"api",
+						"app",
+						"appointment",
+						"confirm",
+						"{{AppointmentId}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Cancel Appointment",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{Token}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"cancelReason\": \"Reschedule\",\r\n  \"cancelComments\": \"Have to reschedule.\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{HubEndpoint}}/api/app/appointment/cancel/{{AppointmentId}}",
+					"host": [
+						"{{HubEndpoint}}"
+					],
+					"path": [
+						"api",
+						"app",
+						"appointment",
+						"cancel",
+						"{{AppointmentId}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Deny Appointment",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{Token}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"appointmentNotes\": \"Have to deny the appointment.\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{HubEndpoint}}/api/app/appointment/deny/{{AppointmentId}}",
+					"host": [
+						"{{HubEndpoint}}"
+					],
+					"path": [
+						"api",
+						"app",
+						"appointment",
+						"deny",
+						"{{AppointmentId}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Create DateTime Restriction",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{Token}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "[\r\n    {\r\n    \"reoccurringId\": 0,\r\n    \"dayOfWeek\": \"Sunday\",\r\n    \"numberOfWeeks\": 2,\r\n    \"beginDate\": \"2021-09-10T18:38:35.647Z\",\r\n    \"startDatetime\": \"2021-09-10T18:38:35.647Z\",\r\n    \"endDatetime\": \"2021-09-10T18:38:35.647Z\"\r\n  },\r\n  {\r\n    \"reoccurringId\": 0,\r\n    \"dayOfWeek\": \"Monday\",\r\n    \"numberOfWeeks\": 2,\r\n    \"beginDate\": \"2021-09-10T18:38:35.647Z\",\r\n    \"startDatetime\": \"2021-09-10T18:38:35.647Z\",\r\n    \"endDatetime\": \"2021-09-10T18:38:35.647Z\"\r\n  },\r\n  {\r\n    \"reoccurringId\": 0,\r\n    \"dayOfWeek\": \"Tuesday\",\r\n    \"numberOfWeeks\": 2,\r\n    \"beginDate\": \"2021-09-10T18:38:35.647Z\",\r\n    \"startDatetime\": \"2021-09-10T18:38:35.647Z\",\r\n    \"endDatetime\": \"2021-09-10T18:38:35.647Z\"\r\n  },\r\n  {\r\n    \"reoccurringId\": 0,\r\n    \"dayOfWeek\": \"Wednesday\",\r\n    \"numberOfWeeks\": 2,\r\n    \"beginDate\": \"2021-09-10T18:38:35.647Z\",\r\n    \"startDatetime\": \"2021-09-10T18:38:35.647Z\",\r\n    \"endDatetime\": \"2021-09-10T18:38:35.647Z\"\r\n  },\r\n  {\r\n    \"reoccurringId\": 0,\r\n    \"dayOfWeek\": \"Thursday\",\r\n    \"numberOfWeeks\": 2,\r\n    \"beginDate\": \"2021-09-10T18:38:35.647Z\",\r\n    \"startDatetime\": \"2021-09-10T18:38:35.647Z\",\r\n    \"endDatetime\": \"2021-09-10T18:38:35.647Z\"\r\n  },\r\n  {\r\n    \"reoccurringId\": 0,\r\n    \"dayOfWeek\": \"Friday\",\r\n    \"numberOfWeeks\": 2,\r\n    \"beginDate\": \"2021-09-10T18:38:35.647Z\",\r\n    \"startDatetime\": \"2021-09-10T18:38:35.647Z\",\r\n    \"endDatetime\": \"2021-09-10T18:38:35.647Z\"\r\n  },\r\n  {\r\n    \"reoccurringId\": 0,\r\n    \"dayOfWeek\": \"Saturday\",\r\n    \"numberOfWeeks\": 2,\r\n    \"beginDate\": \"2021-09-10T18:38:35.647Z\",\r\n    \"startDatetime\": \"2021-09-10T18:38:35.647Z\",\r\n    \"endDatetime\": \"2021-09-10T18:38:35.647Z\"\r\n  }\r\n]",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{HubEndpoint}}/api/app/listing/create_reoccurring_restriction/{{ShowListingId}}",
+					"host": [
+						"{{HubEndpoint}}"
+					],
+					"path": [
+						"api",
+						"app",
+						"listing",
+						"create_reoccurring_restriction",
+						"{{ShowListingId}}"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

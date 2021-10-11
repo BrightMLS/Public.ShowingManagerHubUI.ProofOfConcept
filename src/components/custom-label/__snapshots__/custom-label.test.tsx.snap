@@ -1,0 +1,19 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<CustomLabel /> Component should render without crashing 1`] = `
+<WithStyles(ForwardRef(Typography))
+  className="makeStyles-placeHolder-1"
+  variant="inherit"
+>
+  Application ID*
+</WithStyles(ForwardRef(Typography))>
+`;
+
+exports[`<CustomLabel /> Component should render without crashing 2`] = `
+<WithStyles(ForwardRef(Typography))
+  className="makeStyles-placeHolder-1"
+  variant="inherit"
+>
+  Application ID
+</WithStyles(ForwardRef(Typography))>
+`;
