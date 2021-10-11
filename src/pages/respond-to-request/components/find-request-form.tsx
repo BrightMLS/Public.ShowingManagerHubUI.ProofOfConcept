@@ -22,7 +22,7 @@ const FindRequestFrom = ({ formik, response, statusType }: IProps) => {
           </Grid>
           <Grid item md={5} sm={5} className={classes.requestIdForm}>
             <CustomLabel
-              name={'Request ID'}
+              name={'Appointment ID'}
               isRequired={false}
               customLableStyle={classes.customLableStyle}
             />

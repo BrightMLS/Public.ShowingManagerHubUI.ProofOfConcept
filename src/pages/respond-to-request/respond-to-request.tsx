@@ -31,7 +31,7 @@ const RespondToRequest = () => {
         setShowLoader(true)
         try {
           const response = await axios.get(
-            `${appConfig.apiEndpoint}/app/request/${requestId}`,
+            `${appConfig.apiEndpoint}/app/appointment/${requestId}`,
             {
               headers: {
                 authRequired: true,
@@ -65,15 +65,19 @@ const RespondToRequest = () => {
       requestStatus: '',
     },
     onSubmit: async (values: Record<string, any>) => {
-      const { requestId } = responseData
-      if (values && requestId) {
+      const { appointmentId } = responseData
+      if (values && appointmentId) {
         const { requestStatus } = values
         setShowLoader(true)
         try {
           let requestObj = { ...responseData }
           requestObj.requestStatus = requestStatus
+          let updateAppointmentUrl = `${appConfig.apiEndpoint}/app/appointment/deny/${appointmentId}`
+          if (requestStatus === 'Confirmed') {
+            updateAppointmentUrl = `${appConfig.apiEndpoint}/app/appointment/confirm/${appointmentId}`
+          }
           const response = await axios.put(
-            `${appConfig.apiEndpoint}/app/request/update/${requestId}`,
+            `${updateAppointmentUrl}`,
             requestObj,
             {
               headers: {
